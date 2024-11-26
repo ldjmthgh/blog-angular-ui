@@ -1,0 +1,86 @@
+<div class="flex-column start-center div-all">
+  <div class="flex-column start-center basic-info-box">
+    <div class="flex-column double-center form-input-row">
+      <nz-avatar nzIcon="user" [nzSrc]="user.avatarHttpUrl"></nz-avatar>
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="changeAvatar(avatarUploadTemplate)">更换头像</a>
+    </div>
+    <div class="flex-row start-center form-input-row" style="width: 100%;">
+      <label for="basic-info-userName">用户名</label>
+      <input id="basic-info-userName" type="text" required nz-input placeholder="userName" [(ngModel)]="user.userName"
+             [nzBorderless]="userNameDisFlag" [disabled]="userNameDisFlag">
+      <div class="basic-info-form-action flex-row start-center">
+        <a *ngIf="userNameDisFlag" nz-button nzType="text" style="color: #40a9ff;"
+           (click)="userNameDisFlag = false;">编辑</a>
+        <a *ngIf="!userNameDisFlag" nz-button nzType="text" style="color: #40a9ff;"
+           (click)="userNameDisFlag = true;user.userName = userName;">撤消</a>
+        <a *ngIf="!userNameDisFlag" nz-button nzType="text" style="color: #40a9ff;" (click)="changeUserName()">保存</a>
+      </div>
+    </div>
+    <div class="flex-row start-center form-input-row" style="width: 100%;">
+      <label for="basic-info-nickName">昵称</label>
+      <input id="basic-info-nickName" type="text" required nz-input placeholder="nickName" [(ngModel)]="user.nickName"
+             [nzBorderless]="nickNameDisFlag" [disabled]="nickNameDisFlag">
+      <div class="basic-info-form-action flex-row start-center">
+        <a *ngIf="nickNameDisFlag" nz-button nzType="text" style="color: #40a9ff;"
+           (click)="nickNameDisFlag = false;">编辑</a>
+        <a *ngIf="!nickNameDisFlag" nz-button nzType="text" style="color: #40a9ff;"
+           (click)="nickNameDisFlag = true;user.nickName = nickName;">撤消</a>
+        <a *ngIf="!nickNameDisFlag" nz-button nzType="text" style="color: #40a9ff;" (click)="changeNickName()">保存</a>
+      </div>
+    </div>
+    <div class="flex-row start-center form-input-row" style="width: 100%;">
+      <label for="basic-info-email">邮箱</label>
+      <input id="basic-info-email" type="text" required nz-input placeholder="email" [(ngModel)]="user.email"
+             nzBorderless disabled>
+      <div class="basic-info-form-action">
+        <a nz-button nzType="text" style="color: #40a9ff;" (click)="mvToResetEmailPage()">编辑</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-row start-center basic-info-box">
+    <div class="flex-row double-center" style="flex: 1;">
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="backup()">数据备份</a>
+    </div>
+    <div class="flex-row double-center" style="flex: 1;">
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="recovery(zipUploadTemplate)">数据同步</a>
+    </div>
+  </div>
+  <ng-template #avatarUploadTemplate>
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="false"
+      [nzBeforeUpload]="beforeAvatarFileUpload"
+    >
+      <p class="ant-upload-drag-icon">
+        <i nz-icon nzType="inbox"></i>
+      </p>
+      <p class="ant-upload-text">点击或拖拽文件到此区域内以上传</p>
+      <p *ngIf="!uploadFileFlag" class="ant-upload-hint">
+        请上传单个文件
+      </p>
+      <p *ngIf="uploadFileFlag" class="ant-upload-hint">
+        {{'已上传文件：' + this.avatarFile.name}}
+      </p>
+    </nz-upload>
+  </ng-template>
+
+  <ng-template #zipUploadTemplate>
+    <nz-upload
+      nzType="drag"
+      [nzMultiple]="false"
+      [nzBeforeUpload]="beforeZipFileUpload"
+    >
+      <p class="ant-upload-drag-icon">
+        <i nz-icon nzType="inbox"></i>
+      </p>
+      <p class="ant-upload-text">点击或拖拽文件到此区域内以上传</p>
+      <p *ngIf="!zipFileUploadFlag" class="ant-upload-hint">
+        请上传单个文件
+      </p>
+      <p *ngIf="zipFileUploadFlag" class="ant-upload-hint">
+        {{'已上传文件：' + this.zipFile.name}}
+      </p>
+    </nz-upload>
+  </ng-template>
+</div>

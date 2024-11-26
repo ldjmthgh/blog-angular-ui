@@ -1,0 +1,13 @@
+.viewer-box {
+  padding: 0 26px 16px 26px;
+}
+
+.spinning-icon {
+  width: 100%;
+}
+
+#viewer-editor {
+  height: calc(100% - 156px);
+  width: 60%;
+  min-width: 660px;
+}

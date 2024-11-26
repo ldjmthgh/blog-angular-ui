@@ -1,0 +1,19 @@
+<div class="flex-row div-all">
+  <div class="self-center-nav">
+    <ul nz-menu nzMode="inline">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/selfCenter/basicInfo']">基本信息</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/selfCenter/resetPwd']">重置密码</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/selfCenter/resetEmail']">重置邮箱</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="self-center-router">
+    <router-outlet></router-outlet>
+  </div>
+</div>

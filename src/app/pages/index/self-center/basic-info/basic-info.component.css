@@ -1,0 +1,15 @@
+.basic-info-box {
+  min-width: 600px;
+  padding: 16px;
+  background: white;
+  margin-top: 16px;
+}
+
+#basic-info-userName, #basic-info-nickName, #basic-info-email {
+  color: black;
+}
+
+.form-input-row > .basic-info-form-action {
+  flex: 1;
+  min-width: 120px;
+}

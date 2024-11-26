@@ -1,0 +1,66 @@
+<div class="div-all editor-box">
+  <div class="flex-column editor-header">
+    <div class="flex-column double-center">
+      <h2>{{vo.articleName}}</h2>
+    </div>
+    <div class="flex-row end-center">
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="goBack()">返回首页</a>
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="updateBaseInfo()">基本信息修改</a>
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="publish()">{{vo.published ? '取消发布' : '文档发布'}}</a>
+      <a nz-button nzType="text" style="color: #40a9ff;" (click)="save()">文档保存</a>
+    </div>
+  </div>
+  <div *ngIf="isSpinning" class="flex-row double-center spinning-icon">
+    <nz-spin nzSimple [nzSize]="'large'" ></nz-spin>
+  </div>
+  <div id="md-editor" class="scroll-overflow-box">
+  </div>
+
+  <nz-drawer
+    [nzClosable]="false"
+    [nzVisible]="drawerVisible"
+    nzPlacement="left"
+    nzTitle="基本信息修改"
+    (nzOnClose)="closeDrawer()"
+  >
+    <ng-container *nzDrawerContent>
+      <div class="flex-column">
+        <div class="flex-column form-input-row">
+          <label for="index-articleName">文档名称：</label>
+          <input id="index-articleName" type="text" required nz-input placeholder="" [(ngModel)]="dto.articleName"
+                 [appAppInputDebounce]="checkArticleName">
+          <div class="flex-row start-center error-msg">
+            <span *ngIf="!articleNameDV.passFlag">{{articleNameDV.filterMsg}}</span>
+          </div>
+        </div>
+
+        <div class="flex-column form-input-row">
+          <label for="index-articleSummary">文档简述：</label>
+          <textarea id="index-articleSummary" type="text" required nz-input placeholder=""
+                    [(ngModel)]="dto.articleSummary"
+                    [appAppInputDebounce]="checkArticleSummary"></textarea>
+          <div class="flex-row start-center error-msg">
+            <span *ngIf="!articleSummaryDV.passFlag">{{articleSummaryDV.filterMsg}}</span>
+          </div>
+        </div>
+
+        <div class="flex-column form-input-row">
+          <label for="index-published">是否发布：</label>
+          <nz-radio-group id="index-published" [(ngModel)]="dto.published">
+            <label nz-radio [nzValue]="true">是</label>
+            <label nz-radio [nzValue]="false">否</label>
+          </nz-radio-group>
+        </div>
+
+        <div class="flex-row end-center" style="margin-top: 6px;">
+          <button nz-button nzType="primary" style="color: white;" (click)="closeDrawer()">
+            取消
+          </button>
+          <button nz-button nzType="primary" style="color: white;margin-left: 12px;" (click)="update()">
+            确定
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </nz-drawer>
+</div>

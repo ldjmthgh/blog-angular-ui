@@ -1,0 +1,97 @@
+<div class="flex-row app-root-content">
+  <div class="flex-column start-center app-root-content-nav">
+    <div class="flex-column start-center div-width-full">
+      <button nz-button nzType="primary" class="manager-nav-btn"
+              (click)="uploadDialogOpen(indexUploadTemplate, articleFormTemplate, imageFormTemplate)">
+        上传文件
+      </button>
+      <ng-template #indexUploadTemplate>
+        <nz-upload
+          nzType="drag"
+          [nzMultiple]="false"
+          nzAction=""
+          [nzBeforeUpload]="beforeIndexFileUpload"
+        >
+          <p class="ant-upload-drag-icon">
+            <i nz-icon nzType="inbox"></i>
+          </p>
+          <p class="ant-upload-text">点击或拖拽文件到此区域内以上传</p>
+          <p *ngIf="!uploadFileFlag" class="ant-upload-hint">
+            请上传单个文件
+          </p>
+          <p *ngIf="uploadFileFlag" class="ant-upload-hint">
+            {{'已上传文件：' + this.file.name}}
+          </p>
+        </nz-upload>
+      </ng-template>
+
+      <ng-template #articleFormTemplate>
+        <div class="flex-column">
+          <div class="form-input-row">
+            <label for="index-articleName">文档名称：</label>
+            <input id="index-articleName" type="text" required nz-input placeholder="" [(ngModel)]="article.articleName"
+                   [appAppInputDebounce]="checkArticleName">
+            <div class="flex-row start-center error-msg">
+              <span *ngIf="!articleNameDV.passFlag">{{articleNameDV.filterMsg}}</span>
+            </div>
+          </div>
+
+          <div class="form-input-row">
+            <label for="index-articleSummary">文档简述：</label>
+            <textarea id="index-articleSummary" type="text" required nz-input placeholder=""
+                      [(ngModel)]="article.articleSummary"
+                      [appAppInputDebounce]="checkArticleSummary"></textarea>
+            <div class="flex-row start-center error-msg">
+              <span *ngIf="!articleSummaryDV.passFlag">{{articleSummaryDV.filterMsg}}</span>
+            </div>
+          </div>
+
+          <div class="form-input-row">
+            <label for="index-published">是否发布：</label>
+            <nz-radio-group id="index-published" [(ngModel)]="article.published">
+              <label nz-radio [nzValue]="true">是</label>
+              <label nz-radio [nzValue]="false">否</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #imageFormTemplate>
+        <div class="flex-column">
+          <div class="form-input-row">
+            <label for="index-imageName">图片名称：</label>
+            <input id="index-imageName" type="text" required nz-input placeholder="" [(ngModel)]="image.imageName"
+                   [appAppInputDebounce]="checkImageName">
+            <div class="flex-row start-center error-msg">
+              <span *ngIf="!imageNameDV.passFlag">{{imageNameDV.filterMsg}}</span>
+            </div>
+          </div>
+
+          <div class="form-input-row">
+            <label for="index-imageSummary">图片简述：</label>
+            <input id="index-imageSummary" type="text" required nz-input placeholder="" [(ngModel)]="image.imageSummary"
+                   [appAppInputDebounce]="checkImageSummary">
+            <div class="flex-row start-center error-msg">
+              <span *ngIf="!imageSummaryDV.passFlag">{{imageSummaryDV.filterMsg}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+    <ul nz-menu nzMode="inline" style="margin-top: 12px;">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/mdNav/mdArticle']"><i class="fa fa-list"></i> MD 文档</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/mdNav/mdImage']"><i class="fa fa-image"></i> MD 图片</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/index/mdNav/mdTrash']"><i class="fa fa-trash"></i> 回收站</a>
+      </li>
+    </ul>
+  </div>
+  <div class="app-root-content-router">
+    <router-outlet></router-outlet>
+  </div>
+</div>

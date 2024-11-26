@@ -1,0 +1,13 @@
+.self-center-nav {
+  height: 100%;
+  min-width: 200px;
+  flex: 1;
+  padding: 12px 26px;
+}
+
+.self-center-router {
+  padding: 0 16px;
+  height: 100%;
+  flex: 9;
+  background: #d9d9d9;
+}

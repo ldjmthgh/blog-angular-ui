@@ -1,0 +1,56 @@
+.editor-box {
+  padding: 0 26px 16px 26px;
+}
+
+.editor-header {
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 2px #8080800d;
+  margin-bottom: 3px;
+  margin-top: 12px;
+}
+
+.editor-header input {
+  outline: none;
+  width: 188px;
+  margin: 0 8px;
+}
+
+.editor-header input:enabled:focus {
+  outline: none;
+  width: 188px;
+  margin: 0 8px;
+  border-bottom: 2px solid #40a9ff;
+}
+
+.spinning-icon {
+  width: 100%;
+}
+
+#md-editor {
+  height: calc(100% - 170px);
+}
+
+:host::ng-deep .vditor-reset {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+:host::ng-deep .vditor-reset::-webkit-scrollbar {
+  width: 6px;
+  height: 30px;
+}
+
+:host::ng-deep .vditor-reset::-webkit-scrollbar-thumb {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
+  background: linear-gradient(180deg, #ff8a00, #e52e71);
+  border-radius: 30px;
+  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0, 0, 0, .25);
+}
+
+:host::ng-deep .vditor-reset::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #201c29, #201c29 1px, #100e17 0, #100e17);
+}

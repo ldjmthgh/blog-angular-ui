@@ -1,0 +1,80 @@
+<div class="div-all flex-column">
+  <div class="flex-row between-center my-article-header">
+    <h2>MD 文档</h2>
+    <div class="flex-row start-center">
+      <nz-input-group [nzSuffix]="articleSuffixIconSearch">
+        <input type="text" nz-input placeholder="input search text" [appAppInputDebounce]="searchPage" [(ngModel)]="searchKey"/>
+      </nz-input-group>
+      <ng-template #articleSuffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+  </div>
+  <div class="div-full scroll-overflow-box">
+    <nz-table
+      [nzData]="articleList"
+      [nzFrontPagination]="false"
+      [nzTotal]="totalSize"
+      [nzPageSize]="pageSize"
+      [nzPageIndex]="pageIndex"
+      (nzQueryParams)="pageEvent($event)"
+    >
+      <thead>
+      <tr>
+        <th>文章名</th>
+        <th>文章状态</th>
+        <th>创建时间</th>
+        <th>最近更新时间</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vo of articleList">
+        <td>{{ vo.articleName }}</td>
+        <td>{{ vo.published ? '已发布' : '草稿' }}</td>
+        <td>{{ vo.createTime }}</td>
+        <td>{{ vo.updateTime }}</td>
+        <td class="flex-row start-center">
+          <button
+            nz-button
+            nzType="text"
+            nz-popover
+            (click)="viewArticle(vo)"
+            [nzPopoverContent]="ArticleViewTemplate"
+            nzPopoverPlacement="bottom"
+          >
+            <i class="fa fa-eye"></i>
+          </button>
+          <button nz-button
+                  nz-popover
+                  [nzPopoverContent]="ArticleEditTemplate"
+                  nzType="text"
+                  (click)="mvToEditor(vo)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button nz-button nzType="text"
+                  nz-popover
+                  nz-popconfirm
+                  [nzPopoverContent]="ArticleTrashTemplate"
+                  nzPopconfirmTitle="确定将其移入回收站?"
+                  (nzOnConfirm)="removeArticle(vo)"
+                  nzPopconfirmPlacement="bottom">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+        <ng-template #ArticleViewTemplate>
+          <span style="background: transparent">预览</span>
+        </ng-template>
+
+        <ng-template #ArticleEditTemplate>
+          <span style="background: transparent">编辑</span>
+        </ng-template>
+
+        <ng-template #ArticleTrashTemplate>
+          <span style="background: transparent">移入回收站</span>
+        </ng-template>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="div-all flex-column start-center viewer-box">
+  <div *ngIf="isSpinning" class="flex-row double-center spinning-icon">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+  </div>
+  <div id="viewer-editor" class="scroll-overflow-box" #viewerTop>
+  </div>
+  <nz-back-top [nzTarget]="viewerTop"></nz-back-top>
+</div>

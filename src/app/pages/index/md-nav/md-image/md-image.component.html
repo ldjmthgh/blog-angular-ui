@@ -1,0 +1,80 @@
+<div class="div-all flex-column">
+  <div class="flex-row between-center my-image-header">
+    <h2>MD 图片</h2>
+    <div class="flex-row start-center">
+      <nz-input-group [nzSuffix]="imageSuffixIconSearch">
+        <input type="text" nz-input placeholder="input search text" [appAppInputDebounce]="searchPage" [(ngModel)]="searchKey"/>
+      </nz-input-group>
+      <ng-template #imageSuffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+  </div>
+  <div class="div-full scroll-overflow-box">
+    <nz-table
+      [nzData]="imageList"
+      [nzFrontPagination]="false"
+      [nzTotal]="totalSize"
+      [nzPageSize]="pageSize"
+      [nzPageIndex]="pageIndex"
+      (nzQueryParams)="pageEvent($event)"
+    >
+      <thead>
+      <tr>
+        <th>图片名称</th>
+        <th>上传时间</th>
+        <th>图片类型</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vo of imageList">
+        <td>{{ vo.imageName }}</td>
+        <td>{{ vo.createTime }}</td>
+        <td>{{ vo.imageType }}</td>
+        <td class="flex-row start-center">
+          <button
+            nz-button
+            nzType="text"
+            nz-popover
+            (click)="viewImage(vo)"
+            [nzPopoverContent]="ImageShowTemplate"
+            nzPopoverPlacement="bottom"
+          >
+            <i class="fa fa-eye"></i>
+          </button>
+          <button
+            nz-button
+            nzType="text"
+            nz-popover
+            (click)="copyUrl(vo)"
+            [nzPopoverContent]="ImageCopyTemplate"
+            nzPopoverPlacement="bottom"
+          >
+            <i class="fa fa-copy"></i>
+          </button>
+          <button nz-button nzType="text"
+                  nz-popover
+                  nz-popconfirm
+                  [nzPopoverContent]="ImageTrashTemplate"
+                  nzPopconfirmTitle="确定将其移入回收站?"
+                  (nzOnConfirm)="removeImage(vo)"
+                  nzPopconfirmPlacement="bottom">
+            <i class="fa fa-trash-o"></i>
+          </button>
+
+        </td>
+        <ng-template #ImageShowTemplate>
+          <span style="background: transparent">预览</span>
+        </ng-template>
+        <ng-template #ImageTrashTemplate>
+          <span style="background: transparent">移入回收站</span>
+        </ng-template>
+        <ng-template #ImageCopyTemplate>
+          <span style="background: transparent">复制HTTP链接</span>
+        </ng-template>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

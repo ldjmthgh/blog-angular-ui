@@ -1,0 +1,27 @@
+<header class="flex-row between-center app-root-header">
+  <div class="flex-row start-center blog-logo">
+    <h3 style="cursor: pointer;" (click)="mvToIndex()">ldjws.com</h3>
+  </div>
+  <div class="flex-row end-center blog-avatar">
+    <!--    <nz-badge [nzCount]="8">-->
+    <!--      <i class="fa fa-envelope-o"></i>-->
+    <!--    </nz-badge>-->
+    <nz-avatar nzIcon="user" nz-popover
+               [nzPopoverContent]="avatarPanel" nzPopoverPlacement="bottom"
+               [nzSrc]="user.avatarHttpUrl" (nzError)="avatarLoadError()"></nz-avatar>
+    <span style="margin-left: 8px;">Hi, {{user.userName}}</span>
+  </div>
+</header>
+
+<ng-template #avatarPanel>
+  <nz-list nzSize="small">
+    <nz-list-item class="article-action-item" style="cursor: pointer;" (click)="mvToSelfInfo()">个人中心</nz-list-item>
+    <nz-list-item class="article-action-item" style="cursor: pointer;" (click)="logout()">退出登录</nz-list-item>
+  </nz-list>
+</ng-template>
+
+<router-outlet></router-outlet>
+
+<footer class="flex-row double-center app-root-footer">
+  <span>提供者 <i>贪睡的鱼</i> ©2021-2023 当前版本 {{version}}</span>
+</footer>

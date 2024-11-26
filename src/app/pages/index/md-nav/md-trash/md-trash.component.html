@@ -1,0 +1,18 @@
+<div class="flex-column">
+  <h2 style="padding: 16px 12px;">回收站</h2>
+  <nz-tabset nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['./trashArticle']" queryParamsHandling="merge">
+        MD 文档
+      </a>
+    </nz-tab>
+
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['./trashImage']" queryParamsHandling="merge">
+        MD 图片
+      </a>
+    </nz-tab>
+  </nz-tabset>
+  <router-outlet></router-outlet>
+</div>
+
